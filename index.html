@@ -57,6 +57,7 @@
             <li><a href="https://sawphaung.github.io/web-231/" target="_blank">WEB 231's Landing Page</a></li>
         </ul>
 
+        <!-- Important Links -->
         <h4>Important Links</h4>
         <ul>
             <li><a href="https://github.com/buwebdev/web-330" target="_blank">WEB 330’s GitHub Repository</a></li>
@@ -71,25 +72,29 @@
 
     <script>
         // function from theme.js
-        setDefaultTheme();
+        setDefaultTheme(); // Set up Local Storage
 
+
+        // On/off setting for Light/Dark Mode
         function toggleMode(x) {
             let colorTheme = document.body.classList;
             let iconMode = x.classList;
-            // console.log(colorTheme) //testing purposes
+            // console.log(colorTheme);
 
+            // If light-Theme
             if (colorTheme.value === "light-theme") {
                 localStorage.clear();
                 localStorage.setItem("mode", "dark-theme");
                 localStorage.setItem("iconMode", "fa-toggle-on");
                 localStorage.setItem("iconText", "Dark Mode");
-                // console.log(localStorage) //testing purposes
-            } else {
+                // console.log(localStorage);
+            } else { // If NOT Light-Theme 
                 localStorage.clear();
                 localStorage.setItem("mode", "light-theme");
                 localStorage.setItem("iconMode", "fa-toggle-off");
                 localStorage.setItem("iconText", "Light Mode");
             }
+
             colorTheme.value = localStorage.getItem("mode");
             iconMode.value = `fa ${localStorage.getItem("iconMode")} pull-right`;
             document.getElementById("icon-text").innerHTML = localStorage.getItem("iconText");
