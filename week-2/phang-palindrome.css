@@ -1,0 +1,24 @@
+/*
+============================================
+Title: Palindrome Styling CSS
+File Name: phaung-palindrome.css
+Author: Professor Krasso
+Modified By: Saw Phaung
+Date: Jan 10, 2021
+===========================================
+*/
+/*  */
+
+.btn.btn-primary {
+  width: 300px;
+  background: #4f3674;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #000;
+}
+
+#assign-results-header p {
+  margin: 0;
+}

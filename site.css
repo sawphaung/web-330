@@ -8,10 +8,6 @@ Date: Jan 07, 2021
 ===========================================
 */
 
-body {
-  font-family: "Oswald", Verdana, Arial, sans-serif;
-}
-
 /* Container  */
 #container {
   margin: 50px 100px 0;
@@ -65,7 +61,8 @@ h1 {
 }
 
 .form-field {
-  padding: 20px;
+  padding: 20px 0;
+  margin: 15px 0;
 }
 
 .full-width {
@@ -84,4 +81,55 @@ h1 {
 .assign-results-text {
   text-align: center;
   font-size: 28px;
+}
+
+#container {
+  padding: 20px;
+  width: 600px;
+  margin: 0 auto;
+}
+
+#card-example,
+#form-example,
+#form-results-example {
+  width: 600px;
+  margin: 3% auto 0;
+}
+
+.card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 5px 20px;
+  margin: 25px auto;
+}
+
+.card-content {
+  text-align: center;
+  font-size: 22px;
+}
+
+.form-field input {
+  height: 35px;
+  width: 220px;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  margin-left: 3px;
+  padding: 0 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-field input:focus {
+  border: 1.5px solid #000;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
