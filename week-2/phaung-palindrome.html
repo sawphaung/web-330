@@ -36,8 +36,8 @@
             <div class="card-title">Palindrome Checker</div>
 
             <div class="form-field">
-                <lable for="txtPhrase">Phrase value:</lable>
-                <input id="txtPhrase" type="text">
+                <label for="txtPharse">Pharse value:</label>
+                <input id="txtPharse" type="text">
             </div>
             <button class="btn btn-primary" id="btnCheckPhrase">Check Phrase</button>
         </div>
@@ -86,7 +86,7 @@
 
         // Click Event 
         document.getElementById("btnCheckPhrase").addEventListener("click", function () {
-            var txtPharse = document.getElementById("txtPhrase").value.toLowerCase(); // Get the Text value from input field
+            var txtPharse = document.getElementById("txtPharse").value.toLowerCase(); // Get the Text value from input field
 
             var today = getTodaysDate(); // Get Today Date
             var len = getLength(txtPharse); // Get the length 
