@@ -26,6 +26,8 @@ body.light-theme {
   --btn-hover-background-color: #d6a800;
   --btn-hover-color: #4f3674;
   --input-border-color: #ccc;
+  --anchor-color-visited: #3c275a;
+  --anchor-color-hover: #d6a800;
 }
 
 body.dark-theme {
@@ -46,6 +48,8 @@ body.dark-theme {
   --btn-hover-background-color: #7d4787;
   --btn-hover-color: #fff;
   --input-border-color: #303030;
+  --anchor-color-visited: #fff;
+  --anchor-color-hover: #d176e1;
 }
 
 body {
@@ -136,6 +140,28 @@ h4 {
   box-sizing: border-box;
 }
 
+input:focus {
+  border-color: var(--anchor-color-hover);
+}
+
 .drop-down-menu {
   border: 1px solid var(--input-border-color);
+}
+
+.return-home {
+  color: var(--anchor-color);
+  text-decoration: none;
+}
+
+.return-home:hover {
+  background-color: var(--anchor-hover-background-color);
+  color: var(--anchor-color-hover);
+}
+
+.return-home:visited {
+  color: var(--card-title-color);
+}
+
+.return-home:visited:hover {
+  color: var(--anchor-color);
 }
