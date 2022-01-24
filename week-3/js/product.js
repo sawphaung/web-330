@@ -7,7 +7,7 @@ Date: Jan 17, 2021
 ===========================================
 */
 export class Product {
-    constructor(home, price) {
+    constructor(name, price) {
         this.name = name;
         this.price = price;
     }

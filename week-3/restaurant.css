@@ -7,3 +7,42 @@ Modified By: Saw Phaung
 Date: Jan 17, 2021
 ===========================================
 */
+
+.cards-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.cards-wrap .card {
+  box-sizing: border-box;
+  width: calc(100% / 2 - 20px);
+  margin: 10px 10px;
+  padding: 0 10px;
+}
+
+.cards-wrap .card .card-content {
+  padding: 5px 0;
+}
+
+.card .btn-primary {
+  width: 100%;
+}
+
+.card-content label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  text-align: left;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.card-content label input {
+  display: block;
+  margin-right: 3px;
+  width: 15px;
+  height: 15px;
+}
