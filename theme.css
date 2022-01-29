@@ -28,6 +28,11 @@ body.light-theme {
   --input-border-color: #ccc;
   --anchor-color-visited: #3c275a;
   --anchor-color-hover: #d6a800;
+  --table-header-background-color: #4f3674;
+  --table-header-color: #fff;
+  --table-border-color: #ddd;
+  --table-hover-background-color: #d6a800;
+  --table-hover-color: #4f3674;
 }
 
 body.dark-theme {
@@ -50,6 +55,11 @@ body.dark-theme {
   --input-border-color: #303030;
   --anchor-color-visited: #fff;
   --anchor-color-hover: #d176e1;
+  --table-header-background-color: #d176e1;
+  --table-header-color: #fff;
+  --table-border-color: #303030;
+  --table-hover-background-color: #7d4787;
+  --table-hover-color: #fff;
 }
 
 body {
@@ -115,7 +125,6 @@ h4 {
   margin: 4px 2px 20px;
   cursor: pointer;
   padding: 15px 32px;
-  color: black;
   border-radius: 5px;
   letter-spacing: 0.05em;
 }

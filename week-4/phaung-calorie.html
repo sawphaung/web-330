@@ -1,0 +1,154 @@
+<!--
+    Title: Assignment 4 - Calorie App
+    Author: Professor Krasso
+    Modified by: Saw Phaung
+    Date: Jan 24, 2021
+    Description: Calorie App
+    References: 
+        - https://www.geeksforgeeks.org/how-to-trigger-html-button-after-hitting-enter-button-in-textbox-using-javascript/
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 – Enterprise JavaScript II</title>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../theme.css?v=0.3">
+    <link rel="stylesheet" href="../site.css?v=0.2">
+
+    <link rel="stylesheet" href="./phaung-calorie.css">
+
+    <!-- Google Fonts & Font-Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- JS Theme  -->
+    <script src="../theme.js"></script>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1 class="app-header">Welcome to the Calorie App!</h1>
+
+        <div class="card">
+            <div class="card-title">Calorie Search Form</div>
+
+            <div class="form-field">
+                <label for="txtFoodItem">Enter a food item:</label>
+                <input id="txtFoodItem" type="text">
+                <!-- Required Field Message -->
+                <span id="error-message"></span>
+
+                <!-- Available Food List -->
+                <span id="foodList"></span>
+            </div>
+            <button class="btn btn-primary" id="btnSearch">Search</button>
+        </div>
+
+        <a href="../index.html" class="return-home">Return</a>
+
+        <div class="card">
+            <div class="card-title">Search Results</div>
+
+            <div class="card-content">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Calories</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Script -->
+    <script type="module">
+        //Set user-selected theme.
+        setSelectedTheme();
+
+        // Import files for products and bill
+        import { CalorieConverter } from "./js/calorie-converter.js";
+
+        // Get the Text value from input field
+        let txtFoodItemEl = document.getElementById("txtFoodItem").value.toLowerCase();
+
+        // When the button clicked, the following will be start
+        document.getElementById("btnSearch").addEventListener("click", function () {
+            let txtFoodItem = document.getElementById("txtFoodItem").value.toLowerCase();
+            // console.log(txtFoodItem);
+
+            if (txtFoodItem == "") {
+                // Error Message
+                document.getElementById("error-message").innerHTML = "Please enter this field!"
+
+            } else {
+                // Error Message
+                document.getElementById("error-message").innerHTML = "";
+
+                // Call Static JS and passed inputed value
+                var foods = CalorieConverter.find(txtFoodItem);
+
+                // Check Result array is not empty
+                if (foods.length < 1 || foods == undefined) {
+                    // Not Found Message
+                    alert("Sorry, we couldn't find what you were searching for");
+                } else {
+                    // Got data from foods
+                    let tableData;
+
+                    // loops result data
+                    for (const food of foods) {
+                        tableData = `
+                            <tr>
+                                <td>${food.name}</td>
+                                 <td>${food.calories}</td>
+                            </tr>
+                        `;
+                    }
+                    // Display the result to the Front End
+                    document.getElementById("table-body").innerHTML = tableData;
+                }
+            }
+        });
+
+        // When Enter Key is pressed - 
+        document.getElementById("txtFoodItem").addEventListener("keyup", function (event) {
+            // Checking if key pressed is ENTER or not
+            // if the key pressed is ENTER
+            // click listener on button is called
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                document.getElementById("btnSearch").click();
+            }
+        });
+
+        let foodList = CalorieConverter.data;
+
+
+        var foodListData = "";
+        // loops Available data
+        for (const food of foodList) {
+            foodListData += `<i>${food.name}</i>, `;
+
+        }
+
+        // Remove the last comma and space
+        foodListData = foodListData.slice(0, -2);
+
+        // Display to the Front End
+        document.getElementById("foodList").innerHTML = `(Ex: ${foodListData})`;
+
+    </script>
+
+</body>
+
+</html>
