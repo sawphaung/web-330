@@ -1,0 +1,148 @@
+<!--
+    Title: Assignment 5 - Bobs Auto Repair APp
+    Author: Professor Krasso
+    Modified by: Saw Phaung
+    Date: Feb 04, 2021
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 – Enterprise JavaScript II</title>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../theme.css?v=0.3">
+    <link rel="stylesheet" href="../site.css?v=0.2">
+
+    <link rel="stylesheet" href="./phaung-bobs-auto-repair.css">
+
+    <!-- Google Fonts & Font-Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- JS Theme  -->
+    <script src="../theme.js"></script>
+    <script src="./js/cart-component.js"></script>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1 class="app-header">Welcome to Bob's Automatic Repair Shop!</h1>
+
+        <div class="card">
+            <div class="card-title">Product Listing
+                <br />
+                <cart-component></cart-component>
+            </div>
+
+            <div class="form-field">
+                <label for="productList">Choose a product:</label>
+                <select id="productList" class="drop-down-menu">
+                    <option value="select">--Select--</option>
+                    <option value="19.99">Oil Change</option>
+                    <option value="18.44">Filter Replacement</option>
+                    <option value="9.99">Wiper Fluid Refill</option>
+                </select>
+
+                <i id="cart-message">To view your shopping cart click on the cart icon</i>
+
+            </div>
+            <button class="btn btn-primary" id="btnAddProduct">Add to Cart</button>
+        </div>
+
+        <a href="../index.html" class="return-home">Return</a>
+
+        <div class="card">
+            <div class="card-title">Shopping Cart</div>
+            <div class="card-content" id="shoppingCart"></div>
+        </div>
+    </div>
+
+    <!-- JS Script -->
+    <script type="module">
+        //Set user-selected theme.
+        setSelectedTheme();
+
+        // Import statements for the Product and ShoppingCart classes
+        import { Product } from "./js/product.js";
+        import { ShoppingCart } from "./js/shopping-cart.js";
+
+        // Instantiate a new ShoppingCart object
+        let shoppingCart = new ShoppingCart();
+
+        // call the count function from the ShoppingCart object and bind the results
+        function setCartCount() {
+            let cartCount = document.getElementById("cart-count");
+            cartCount.innerHTML = shoppingCart.count();
+        }
+
+        // Call setCartCount function
+        setCartCount();
+
+        // When the button clicked, the following will be start
+        document.getElementById("btnAddProduct").addEventListener("click", function () {
+            // Create a variable named productList and assign it the productList
+            let productList = document.getElementById("productList");
+
+            // Create a variable named product and assign it the value
+            let product = productList.options[productList.selectedIndex].text;
+
+            // Create a variable named productValue as assign it the value
+            let productValue = productList.options[productList.selectedIndex].value;
+
+            // compare the product variable against the string value
+            if (productValue !== 'select') {
+
+                // Call the ShoppingCart add function and pass-in a new
+                // Product object using the product and productValue variables and arguments
+                shoppingCart.add(new Product(product, productValue));
+
+                setCartCount();
+
+                // Alert the message
+                alert(`${product} was added to your shopping cart!`);
+
+                document.getElementById("productList").value = "select";
+
+            }
+
+        });
+
+
+
+        // When the button clicked, the following will be start and Cart Icon is activate
+        document.getElementById("cartIcon").addEventListener("click", function () {
+
+            // Create a variable named cartDisplayTable and assign it the string value with the header of an HTML table
+            let cartDisplayTable = `
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>  
+                    </tr> 
+            `;
+
+            // Iterate over the ShoppingCart object using the Iterator you created in the shopping - cart.js file
+            for (let product of shoppingCart) {
+                cartDisplayTable += `
+                    <tr>    
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td> 
+                    </tr>
+                `;
+            }
+
+            // Display to the Front End for the Lists of Cart Product
+            document.getElementById("shoppingCart").innerHTML = cartDisplayTable + `</table>`;
+        });
+    </script>
+
+</body>
+
+</html>

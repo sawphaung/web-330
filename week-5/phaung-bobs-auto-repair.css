@@ -1,0 +1,23 @@
+/*
+============================================
+Title: Bobs Auto Repair
+File Name: phaung-bobs-auto-repair.css
+Author: Professor Krasso
+Modified By: Saw Phaung
+Date: Feb 04, 2021
+===========================================
+*/
+#cart-message {
+  display: block;
+  color: #df546a;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+#cart-message:hover {
+  cursor: pointer;
+}
+
+button#btnAddProduct {
+  width: 330px;
+}
