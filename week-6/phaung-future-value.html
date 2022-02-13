@@ -1,0 +1,170 @@
+<!--
+    Title: Assignment 6- Future Value App
+    Author: Professor Krasso
+    Modified by: Saw Phaung
+    Date: Feb 11, 2021
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB 330 – Enterprise JavaScript II</title>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../theme.css?v=0.3">
+    <link rel="stylesheet" href="../site.css?v=0.2">
+
+    <link rel="stylesheet" href="./phaung-future-value.css">
+    <link rel="stylesheet" href="../flex-layout.css">
+
+    <!-- Google Fonts & Font-Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- JS Theme  -->
+    <script src="../theme.js"></script>
+
+</head>
+
+<body>
+
+    <div id="container">
+        <h1 class="app-header">Welcome to the Future Value App!</h1>
+
+        <div class="card">
+            <div class="card-title">Future Value Calculator</div>
+            <br />
+
+            <!-- Error Message -->
+            <div class="row">
+                <div class="col-12" id="errorLog"></div>
+            </div>
+
+            <!-- Form Field -->
+            <div class="form-field row">
+                <label class="col-5 form-label" for="txtMonthlyPayment">Monthly Payment:</label>
+                <input class="col-7" id="txtMonthlyPayment" type="text">
+            </div>
+
+            <!-- Form Field -->
+            <div class="form-field row">
+                <label class="col-5 form-label" for="txtYearlyRate">Interest Rate:</label>
+                <input class="col-7" id="txtYearlyRate" type="text">
+                <i class="danger">Enter 11% as 11.1:</i>
+            </div>
+
+
+
+            <!-- Form Select Option -->
+            <div class="form-field row">
+                <label class="form-label col-5" for="listNumOfYears">Number of Years</label>
+                <select class="drop-down-menu col-7" id="listNumOfYears">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+
+            </div>
+
+            <button class="btn btn-primary" id="btnCalculate">Calculate</button>
+        </div>
+
+        <a href="../index.html" class="return-home">Return</a>
+
+        <div class="card">
+            <div class="card-title">Calculation as of <span id="today"></span></div>
+            <div class="card-content" id="futureValue"></div>
+        </div>
+    </div>
+
+    <!-- JS Script -->
+    <script type="module">
+        //Set user-selected theme.
+        setSelectedTheme();
+
+        // Import statements for the Product and ShoppingCart classes
+        import { FinanceCalculator } from "./js/finance-calculator.js";
+        import { Validator } from "./js/validator.js"
+
+        // Today Date
+        const todayDate = new Date().toLocaleDateString();
+        document.getElementById("today").innerHTML = `${todayDate}`;
+
+        // When the button clicked, the following will be start
+        document.getElementById("btnCalculate").addEventListener("click", function () {
+
+            // Create Variables
+            let monthlyPayment = document.getElementById("txtMonthlyPayment").value;
+            let rate = document.getElementById("txtYearlyRate").value;
+            let years = document.getElementById("listNumOfYears").value;
+            let errorLogEl = document.getElementById("errorLog");
+
+            // Monthly Variables
+            let monthlyPaymentValidator = new Validator('Monthly Payment', monthlyPayment);
+            monthlyPaymentValidator.addRequiredField();
+            monthlyPaymentValidator.addRequiredFloatField();
+            monthlyPaymentValidator.addFloatMinField(100);
+
+            // Interest Variables
+            let rateValidator = new Validator('Interest Rate', rate);
+            rateValidator.addRequiredField();
+            rateValidator.addRequiredFloatField();
+            rateValidator.addFloatMaxField(100);
+
+            // Error Logs
+            var errorLog = [];
+
+            // Validate Inputs  Monthly - Error Message
+            if (!monthlyPaymentValidator.validate()) {
+                for (let msg of monthlyPaymentValidator.messages) {
+                    errorLog.push(msg);
+                }
+            }
+
+            // Validate Inputs  Rate - Error message
+            if (!rateValidator.validate()) {
+                for (let msg of rateValidator.messages) {
+                    errorLog.push(msg);
+                }
+            }
+
+            // Validate Inputs are true
+            if (monthlyPaymentValidator.validate() && rateValidator.validate()) {
+                errorLogEl.innerHTML = "";
+
+                let futureValue = FinanceCalculator.calculateFuture(monthlyPayment, rate, years);
+                // console.log(futureValue);
+
+                // Display Result
+                document.getElementById("futureValue").innerHTML = `The future value is ${futureValue}`;
+
+            } else { // Validate inputs are false
+                errorLogEl.innerHTML = "";
+
+                let errorLogMessage = `<ul>`;
+
+                // Loop Errors
+                for (let msg of errorLog) {
+                    errorLogMessage += `<li>${msg}</li>`;
+                }
+
+                // Display Result
+                document.getElementById("errorLog").innerHTML = errorLogMessage + `</ul>`;
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

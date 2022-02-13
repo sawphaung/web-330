@@ -1,0 +1,39 @@
+/*
+============================================
+Title: Future Value
+File Name: phaung-future-value.css
+Author: Professor Krasso
+Modified By: Saw Phaung
+Date: Feb 12, 2022
+===========================================
+*/
+.danger {
+  position: absolute;
+  left: 42%;
+  top: 80%;
+  color: #df546a;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.danger::after {
+  content: "";
+  display: table;
+  width: 100%;
+  clear: both;
+}
+
+.form-field {
+  position: relative;
+  max-width: 70%;
+  margin: 0;
+}
+
+.form-label {
+  display: inline-block;
+  padding-top: 0.5rem;
+}
+
+.btn-primary {
+  width: 350px;
+}
