@@ -1,0 +1,23 @@
+/*
+============================================
+Title: WhatABook App
+File Name: phaung-whatabook.css
+Author: Professor Krasso
+Modified By: Saw Phaung
+Date: Feb 20, 2021
+===========================================
+*/
+
+#container {
+  width: 100%;
+  max-width: 800px;
+}
+
+#bookTable {
+  width: 100%;
+}
+
+#bookTable tr td {
+  padding: 5px 10px;
+  text-align: left;
+}
