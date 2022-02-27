@@ -1,5 +1,3 @@
-import { init } from "express/lib/application";
-
 /*
 Title: HTTP-Client Js
 Author: Saw Phaung

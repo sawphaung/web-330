@@ -60,7 +60,7 @@
 
         let isbns = [
             "0345339681",
-            "0261103571",
+            "9780007637676",
             "9780593099322",
             "9780261102361",
             "9780261102378",
@@ -96,7 +96,12 @@
             let self = this;
             let isbn = self.innerText;
 
-            new params();
+            // new params();
+            const params = {
+                "bibkeys": `ISBN:${isbn}`,
+                "format": "json",
+                "jscmd": "details"
+            };
 
             http.get("https://openlibrary.org/api/books", params).then(res => {
                 document.getElementById("selectedBook").innerHTML = buildHtmlString(res, "<ul>")
@@ -127,11 +132,13 @@
                 ulString += `<ul style="list-style-type:none; padding-left: 0; text-align: left; font-size: 18px;">`;
 
                 if (res.hasOwnProperty(key)) {
+
                     let authors = [];
+
                     if (res[key].details.authors) {
                         authors = res[key].details.authors.map(function (author) {
                             return author.name;
-                        })
+                        });
                     }
 
 
@@ -144,11 +151,11 @@
                     }
 
                     ulString += `
-                <li><b>ISBN:</b> ${book.isbn}</li>
-                <li><b>Title:</b> ${book.title}</li>
-                <li><b>Description:</b> ${book.description}</li>
-                <li><b>Pages:</b> ${book.pages}</li>
-                <li><b>Authors:</b> ${book.authors}</li> 
+                <li><strong>ISBN:</strong> ${book.isbn}</li>
+                <li><strong>Title:</strong> ${book.title}</li>
+                <li><strong>Description:</strong> ${book.description}</li>
+                <li><strong>Pages:</strong> ${book.pages}</li>
+                <li><strong>Authors:</strong> ${book.authors}</li> 
                 `;
 
                     tableString += `
@@ -163,7 +170,6 @@
                 }
 
             }
-
 
             // Close HTML table string.
             ulString += "</ul>";
@@ -182,7 +188,7 @@
             var viewButtons = document.querySelectorAll("#bookTable tbody .isbn-link");
 
             for (let i = 0; i < viewButtons.length; i++) {
-                viewButtons[i].addEventListener("click", anchorClicked);
+                viewButtons[i].addEventListener("click", getBook);
             }
         }
 
